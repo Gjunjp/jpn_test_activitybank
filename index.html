@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JLPT N3 アクティビティバンク</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; background-color: #f8fafc; }
+        .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        /* 彈出視窗動畫 (Modal Transitions) */
+        .modal-enter { opacity: 0; }
+        .modal-enter-active { opacity: 1; transition: opacity 0.3s ease-out; }
+        .modal-scale-enter { transform: scale(0.95); opacity: 0; }
+        .modal-scale-enter-active { transform: scale(1); opacity: 1; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    </style>
+</head>
+<body class="text-slate-800 antialiased">
+
+    <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tight flex items-center justify-center gap-3">
+                <i class="ph-fill ph-crown text-4xl text-amber-400"></i> JLPT N3 アクティビティバンク
+            </h1>
+            <p class="mt-2 text-slate-300 text-sm md:text-base">日本語能力試験 N3レベル（中級） | 30–45分 | カードをクリックして詳細を読む</p>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex space-x-1 overflow-x-auto no-scrollbar pb-2" aria-label="Tabs" id="tabs">
+                <button onclick="switchTab('vocabulary')" class="tab-btn w-full flex items-center justify-center gap-2 py-3 px-4 text-sm font-semibold rounded-t-lg bg-white text-slate-900 hover:bg-slate-100 transition-colors whitespace-nowrap active-tab" data-target="vocabulary">
+                    <i class="ph ph-text-aa text-lg"></i> 語彙
+                </button>
+                <button onclick="switchTab('grammar')" class="tab-btn w-full flex items-center justify-center gap-2 py-3 px-4 text-sm font-semibold rounded-t-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors whitespace-nowrap" data-target="grammar">
+                    <i class="ph ph-brackets-curly text-lg"></i> 文法
+                </button>
+                <button onclick="switchTab('conversation')" class="tab-btn w-full flex items-center justify-center gap-2 py-3 px-4 text-sm font-semibold rounded-t-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors whitespace-nowrap" data-target="conversation">
+                    <i class="ph ph-chats text-lg"></i> 会話
+                </button>
+                <button onclick="switchTab('reading')" class="tab-btn w-full flex items-center justify-center gap-2 py-3 px-4 text-sm font-semibold rounded-t-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors whitespace-nowrap" data-target="reading">
+                    <i class="ph ph-book-open-text text-lg"></i> 読解
+                </button>
+                <button onclick="switchTab('comprehensive')" class="tab-btn w-full flex items-center justify-center gap-2 py-3 px-4 text-sm font-semibold rounded-t-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors whitespace-nowrap" data-target="comprehensive">
+                    <i class="ph ph-puzzle-piece text-lg"></i> 総合スキル
+                </button>
+                <button onclick="switchTab('listening')" class="tab-btn w-full flex items-center justify-center gap-2 py-3 px-4 text-sm font-semibold rounded-t-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors whitespace-nowrap" data-target="listening">
+                    <i class="ph ph-headphones text-lg"></i> 聴解
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <section id="vocabulary" class="tab-content active">
+            <div class="mb-6 border-l-4 border-slate-800 pl-4">
+                <h2 class="text-2xl font-bold text-slate-800">語彙ゲーム</h2>
+                <p class="text-slate-500">漢字の成り立ち、日常の慣用句、文化的背景、そして言葉の微妙なニュアンスをマスターします。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="bg-slate-100 text-slate-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">1</span>
+                        <h3 class="text-lg font-bold game-title group-hover:text-slate-800 transition-colors">類義語のニュアンス</h3>
+                    </div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 似た言葉の微細な違いを見分ける</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">意味はほぼ同じでも、使われる状況や感情的な背景が全く異なる言葉を分析します。</p>
+                    <div class="mt-4 text-xs font-bold text-slate-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">ニュアンスが異なる類義語のセット（例：「怒る」vs「叱る」、「冷たい」vs「涼しい」）。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>各グループにN3レベルの類義語のセットを配ります。</li>
+                            <li>ポジティブ・ネガティブ、フォーマル・カジュアルなどの基準で言葉をマトリックスに配置します。</li>
+                            <li>その言葉「だけ」が社会的に適切に使われる具体的な文脈（例文）を一つ作成します。</li>
+                            <li>クラス全体でそれぞれの選択について議論します。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">N3レベルでは、単語を暗記するだけでなく「誰に対して」「どんな状況で」使うかが重要です。「怒る（感情）」と「叱る（教育）」の違いを意識させましょう。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="bg-slate-100 text-slate-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">2</span>
+                        <h3 class="text-lg font-bold game-title group-hover:text-slate-800 transition-colors">言葉遣いのカメレオン</h3>
+                    </div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 場面に応じた文体の切り替え（タメ口 vs 敬語）</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">硬いビジネス用語や丁寧語を、瞬時に友達同士のカジュアルな話し方に変換する競争をします。</p>
+                    <div class="mt-4 text-xs font-bold text-slate-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">ビジネスメール、ニュース記事、LINEのチャットの抜粋。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>フォーマルな文を提示します（例：「大変申し訳ございませんが、明日の会議は欠席いたします」）。</li>
+                            <li>チームは60秒以内に、これを親しい友人へのLINEメッセージ（タメ口）に変換します。</li>
+                            <li>ラウンド2では逆を行います。カジュアルな文（「ごめん、明日行けなくなったわ」）を上司への丁寧な報告に引き上げます。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">中級学習者は「ウチ」と「ソト」の概念を理解する必要があります。丁寧語（です・ます）と普通体の切り替えが自然なコミュニケーションの鍵です。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-slate-100 text-slate-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">3</span><h3 class="text-lg font-bold game-title group-hover:text-slate-800 transition-colors">外交官のジレンマ</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: クッション言葉と婉曲表現をマスターする</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">言いにくいニュースや断りを、相手を傷つけないように「オブラートに包んで」伝える練習をします。</p>
+                    <div class="mt-4 text-xs font-bold text-slate-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">残酷な真実が書かれたカード（例：「あなたの提案はつまらない」「デートには絶対に行きたくない」）。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>広報担当役の学生に「残酷な真実」を渡します。</li>
+                            <li>彼らは直接的な否定の言葉（つまらない、嫌だ）を一切使わずに、クラス（記者）にメッセージを伝えなければなりません。</li>
+                            <li>例：「つまらない」→「もう少し検討の余地があるかもしれません」。「行きたくない」→「あいにく、その日は都合が悪くて…」。</li>
+                            <li>記者はその遠回しな表現が、実際には何を意味しているのかを推測します。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">日本のコミュニケーションでは「空気を読む」ことや直接的な表現を避けることが重要です。「ちょっと…」の魔法を教えましょう。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-slate-100 text-slate-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">4</span><h3 class="text-lg font-bold game-title group-hover:text-slate-800 transition-colors">慣用句の達人</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 日常的な慣用句の即座な引き出し</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">教科書以外でもよく使われる体の部位を使った慣用句やことわざを素早く答えるドリルです。</p>
+                    <div class="mt-4 text-xs font-bold text-slate-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">N3レベルの慣用句フラッシュカード（例：「耳が痛い」「顔が広い」「頭にくる」）。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>具体的な状況を読み上げます（例：「人に自分の欠点を指摘されて、聞くのが辛い状況」）。</li>
+                            <li>学生はその状況を表す正確な慣用句を思い出さなければなりません（「耳が痛い」）。</li>
+                            <li>正解したら、即座にその慣用句を使った自然な会話文を作ります。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">日本の慣用句は「気」や「体の一部（目、口、鼻）」を使うものが非常に多いです。文字通りの意味との違いを視覚的に説明すると効果的です。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-slate-100 text-slate-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">5</span><h3 class="text-lg font-bold game-title group-hover:text-slate-800 transition-colors">造語の鍛冶屋</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 接辞を使った単語形成（語彙力拡張）</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">「無～」「～的」「～化」などの接辞を使って、新しい現象を表す自然な日本語の単語を発明します。</p>
+                    <div class="mt-4 text-xs font-bold text-slate-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">まだ名前がない現代の経験のリスト（例：「スマホが振動していないのに鳴った気がする現象」）。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>特定の概念を提示します（例：「LINEで相手が長く文字を入力しているのを見て焦る気持ち」）。</li>
+                            <li>学生はN3の漢字や接頭辞・接尾辞を使って、その現象を表す新しい言葉を発明します（例：「入力恐怖症」「無通知不安」など）。</li>
+                            <li>その言葉の意味と、辞書に載せるような例文を発表します。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">漢字の組み合わせルール（造語力）を理解すれば、知らない単語に出会っても意味を推測できるようになります。N3読解の大きな武器です。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-slate-100 text-slate-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">6</span><h3 class="text-lg font-bold game-title group-hover:text-slate-800 transition-colors">漢字の解剖学</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 部首や漢字の構成から意味を推測する</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">まだ習っていないN2〜N1レベルの熟語を見て、使われている漢字の部首や意味から単語の意味を推理します。</p>
+                    <div class="mt-4 text-xs font-bold text-slate-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">少し難しい熟語のリスト（例：「睡眠」「満腹」「清掃」）。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>学生が知らない単語を板書します（例：「睡眠」）。</li>
+                            <li>部首を特定します（「睡」は「目」へん、「眠」も「目」へん）。</li>
+                            <li>部首から「目に関係する＝寝ること」だと推理します。</li>
+                            <li>辞書を使わずに、最も多く正確な意味を推測できたチームにポイントを与えます。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">非漢字圏の学習者にとって、部首は強力なヒントです。「氵（さんずい）＝水」「扌（てへん）＝手の動作」という法則を体感させましょう。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-slate-100 text-slate-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">7</span><h3 class="text-lg font-bold game-title group-hover:text-slate-800 transition-colors">ことわざと文化的背景</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 日本特有の表現を理解する</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">日常会話によく登場する日本のことわざや四字熟語を解読し、現代の状況に当てはめます。</p>
+                    <div class="mt-4 text-xs font-bold text-slate-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">有名なことわざ（例：「猿も木から落ちる」「猫に小判」「一石二鳥」）。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>文を提示します：「プロの彼が失敗するなんて、まさに猿も木から落ちるだね。」</li>
+                            <li>学生は直訳（猿が木から落ちる）を考えた後、その本当の意味（どんな達人でも失敗する）を説明します。</li>
+                            <li>その後、このフレーズがぴったり当てはまる現代のシチュエーション（例：プロゲーマーが簡単なミスをした）をブレインストーミングします。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">中級レベルの会話では、ネイティブはこれらの表現を説明なしに頻繁に使います。動物が出てくる表現は特に親しみやすく覚えやすいです。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-slate-100 text-slate-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">8</span><h3 class="text-lg font-bold game-title group-hover:text-slate-800 transition-colors">語彙の星座</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 関連語彙をマッピングする</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">トピックだけでなく、感情や使用場面に基づいて単語を繋ぎ合わせ、複雑な視覚的マップ（マインドマップ）を作成します。</p>
+                    <div class="mt-4 text-xs font-bold text-slate-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">大きなA3用紙、カラーマーカー。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>グループにコアとなる概念（例：「仕事」）を与えます。</li>
+                            <li>彼らはそこから、ポジティブな言葉（やりがい、昇進）、ネガティブな言葉（残業、ストレス）、ニュートラルな言葉（会議、出張）に枝分かれするウェブを作成します。</li>
+                            <li>混同しやすい言葉（例：「給料」と「ボーナス」）を線で結び、違いをメモします。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">単語をリストで暗記するのではなく、ネットワークとして記憶させることで、会話中の引き出し（語彙の瞬発力）が格段に早くなります。</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="grammar" class="tab-content">
+            <div class="mb-6 border-l-4 border-rose-500 pl-4">
+                <h2 class="text-2xl font-bold text-slate-800">文法ゲーム</h2>
+                <p class="text-slate-500">使役受身、条件形（〜ば/たら/なら）、複雑な助詞の省略、推量表現を実践的にマスターします。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-rose-100 text-rose-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">1</span><h3 class="text-lg font-bold game-title group-hover:text-rose-700 transition-colors">構文のアクロバット</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 能動態、受身態、使役受身の劇的な変換</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">単純な文の主語を変えることで、文末の動詞（態）を完全に再構築し、心理的なニュアンスを変えます。</p>
+                    <div class="mt-4 text-xs font-bold text-rose-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">シンプルな行動が書かれたカード。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>テキストを提示します：「部長は私にビールを飲ませた。」（使役）</li>
+                            <li>主語を「私」に変えて文を再構築させます：「私は部長にビールを飲まされた。」（使役受身）</li>
+                            <li>この「〜させられる（嫌だけど強制された）」という被害のニュアンスがどう変わったかを評価します。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">N3学習者にとって最大の壁である「受身・使役・使役受身」。「誰が」「どう感じているか」という心理的アプローチから教えるのが効果的です。</div>
+                </div>
+                
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-rose-100 text-rose-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">2</span><h3 class="text-lg font-bold game-title group-hover:text-rose-700 transition-colors">願望と依頼の極意</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 複雑な依頼表現をマスターする</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">「〜てください」から脱却し、ビジネスや公式な場面で使える高度な依頼表現をドラフトします。</p>
+                    <div class="mt-4 text-xs font-bold text-rose-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">フォーマルな要求が必要なシチュエーションカード。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>シナリオを提示します：「教授に推薦状を書いてほしいが、とても忙しそうにしている。」</li>
+                            <li>学生は「書いてください」を使わずに依頼文を書きます。</li>
+                            <li>例：「書いていただけないでしょうか」「書いていただけるとありがたいのですが」。</li>
+                            <li>状況に応じて適切な敬語のレベルを選択できたかにポイントを与えます。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">「〜ていただけませんか」や「〜てもよろしいでしょうか」はN3の必須項目です。クッション言葉（お忙しいところ恐れ入りますが）とセットで教えましょう。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-rose-100 text-rose-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">3</span><h3 class="text-lg font-bold game-title group-hover:text-rose-700 transition-colors">究極の省略</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 自然な日本語の「省略」を体得する</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">主語や助詞（は・が・を）が多すぎる不自然な文章から、不要なものを外科手術のように切り取ります。</p>
+                    <div class="mt-4 text-xs font-bold text-rose-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">「私」や助詞が過剰に使われている文章。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>テキストを提示します：「私は昨日、私の友達とレストランに行きました。そして私はピザを食べました。」</li>
+                            <li>学生は主語を省略して自然にします：「昨日、友達とレストランに行って、ピザを食べました。」</li>
+                            <li>さらに会話レベルまで削ります：「昨日友達とレストラン行って、ピザ食べたよ。」（助詞の省略）</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">日本語は「ハイコンテクスト（文脈依存）」な言語です。「言わなくてもわかることは言わない」のが、よりネイティブらしく聞こえるコツです。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-rose-100 text-rose-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">4</span><h3 class="text-lg font-bold game-title group-hover:text-rose-700 transition-colors">もしもの歴史（条件形）</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 「と・ば・たら・なら」の複雑な操作</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">過去の出来事を書き換えながら、N3で最も厄介な条件形（〜ば、〜たら）を使い分けます。</p>
+                    <div class="mt-4 text-xs font-bold text-rose-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">有名な歴史的出来事や日常の失敗談の短い要約。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>事実を提示します：「昨日、傘を持っていかなかったので、濡れました。」</li>
+                            <li>「〜たら」を使って反実仮想を作ります：「もし傘を持っていったら、濡れなかったのに。」</li>
+                            <li>アドバイスの「〜なら」と比較します：「雨が降るなら、傘を持っていくべきだ。」</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">「〜ば（一般的条件）」「〜たら（完了・発見）」「〜なら（アドバイス・前提）」の違いは文法的に非常に重要です。明確なシチュエーションで練習させましょう。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-rose-100 text-rose-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">5</span><h3 class="text-lg font-bold game-title group-hover:text-rose-700 transition-colors">推量のスペクトル</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 確実性の度合い（〜はずだ、〜かもしれない）の表現</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">0%（絶対ない）から100%（確実）までのスケールに合わせて、文末表現を正確にランク付けして適用します。</p>
+                    <div class="mt-4 text-xs font-bold text-rose-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">0%から100%までの確率スケール。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>事実を提示します：「彼は明日パーティーに来ます。」</li>
+                            <li>確率をコールします。例：「90%！」</li>
+                            <li>学生は文を変更します：「彼は明日パーティーに来るはずだ。」または「来るに違いない。」</li>
+                            <li>30%の場合：「来るかもしれない。」0%の場合：「来るわけがない。」</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">「〜と思う」だけで済ませるのではなく、N3レベルの「〜はずだ（客観的根拠あり）」と「〜に違いない（強い確信）」の違いを意識させましょう。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-rose-100 text-rose-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">6</span><h3 class="text-lg font-bold game-title group-hover:text-rose-700 transition-colors">伝聞と引用のレポーター</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 責任を回避する客観的報告（〜そうだ、〜ということだ）</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">自分が直接見たわけではない噂やニュースを、「〜だそうです」「〜とのことです」を使って正確に伝達します。</p>
+                    <div class="mt-4 text-xs font-bold text-rose-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">有名人のゴシップや天気予報のニュース記事。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>チームに情報（例：「明日は大雪になる」）を与えます。彼らは慎重なレポーターとして振る舞います。</li>
+                            <li>これを伝聞形に書き直します：「天気予報によると、明日は大雪になるそうです。」</li>
+                            <li>フォーマルな言い換えに挑戦させます：「大雪になるということです。」</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">様態の「〜そうだ（降りそうだ：見た目）」と伝聞の「〜そうだ（降るそうだ：聞いた話）」の違いは、N3文法の最重要ポイントの一つです。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-rose-100 text-rose-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">7</span><h3 class="text-lg font-bold game-title group-hover:text-rose-700 transition-colors">指示語の魔法（こそあど）</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 「これ・それ・あれ」を使った文章の結束性</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">接続詞（しかし、だから）を使わずに、「このような」「その点」などの指示語だけで文章を滑らかに繋ぐ練習です。</p>
+                    <div class="mt-4 text-xs font-bold text-rose-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">短文作成用のプロンプト。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>標準的な接続詞（だから、しかし、そして）の使用を禁止します。</li>
+                            <li>学生は意見を主張する短い段落を書きます。</li>
+                            <li>文と文を繋ぐために、指示語（こそあど言葉）を使用しなければなりません（例：「若者の車離れが進んでいる。**その**背景には…」）。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">N3の読解問題では、「それ」が何を指しているかを問う問題が必ず出題されます。自分が書くことで、文章の構造的理解が深まります。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-rose-100 text-rose-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">8</span><h3 class="text-lg font-bold game-title group-hover:text-rose-700 transition-colors">誤用チェッカー</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 「ら抜き言葉」や二重敬語などのスタイルの修正</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">ネイティブもよく間違える不自然な日本語のテキストを編集し、正しい文法と綺麗なスタイルに直します。</p>
+                    <div class="mt-4 text-xs font-bold text-rose-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">意味は通じるが、文法的に誤りがあるテキスト。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>テキストを提示します：「部長がおっしゃられたように、私は朝早く来れます。」</li>
+                            <li>学生は二重敬語（おっしゃられる→おっしゃった）と、ら抜き言葉（来れる→来られる）を見つけて修正します。</li>
+                            <li>他にも「馬から落馬する」のような重複表現（重言）を探して修正させます。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">正しい文法を知ることは、自信を持って話すことに繋がります。特に可能形の「〜られる」と受身・尊敬の混同は丁寧に整理しましょう。</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="conversation" class="tab-content">
+            <div class="mb-6 border-l-4 border-amber-500 pl-4">
+                <h2 class="text-2xl font-bold text-slate-800">会話ゲーム</h2>
+                <p class="text-slate-500">理由の説明（〜ため）、丁寧な断り、クレーム対応など、実践的で複雑なコミュニケーションを行います。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">1</span><h3 class="text-lg font-bold game-title group-hover:text-amber-700 transition-colors">なぜなぜ問答</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 理由や原因を深く説明する（〜からです、〜ためです）</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">抽象的なテーマについて、ひたすら「なぜ？」と問いかけ、論理的な日本語で答え続ける対話演習です。</p>
+                    <div class="mt-4 text-xs font-bold text-amber-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">議論のテーマ（例：「都会と田舎、どちらに住むべきか」）。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>机を円形に並べます。テーマを提示します（例：「都会のほうがいい」）。</li>
+                            <li>教師は口を挟みません。学生が会話を主導します。</li>
+                            <li>クラスメイトの意見に対して、「なぜそう思うのですか？」と深く掘り下げる質問だけをして返答します。</li>
+                            <li>答える側は「〜からです」「〜という理由で」を使って論理的に説明します。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">深い反対意見を述べるためのフレーズを提供します：「おっしゃることはわかりますが…」「その一方で、〜という考え方もありませんか？」</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">2</span><h3 class="text-lg font-bold game-title group-hover:text-amber-700 transition-colors">悪魔の代弁者</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 説得力のある論理的構成</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">非常に不人気、または変なルールを、完璧な日本語の論理で擁護する（守る）スピーチをします。</p>
+                    <div class="mt-4 text-xs font-bold text-amber-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">ばかばかしい、または物議を醸すルールのリスト（例：「夏休みは廃止すべきだ」）。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>学生に弁護不可能な立場を割り当てます。</li>
+                            <li>2分間で「〜というメリットがあります」「したがって〜べきです」と説得力のあるスピーチを組み立てます。</li>
+                            <li>クラスはそれに反対質問をします。発表者はキャラクターを崩さず、論理的に弁護し続けなければなりません。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">日本語を使って論理的に相手を説得できれば、語学的な認知の柔軟性が身についている証拠です。接続詞の効果的な使い方を評価します。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">3</span><h3 class="text-lg font-bold game-title group-hover:text-amber-700 transition-colors">トラブル解決ロールプレイ</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: クレーム対応と謝罪（事態の鎮静化）</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">職場やアルバイト先でのトラブルを想定し、丁寧な謝罪と解決策の提案を行うプレッシャーの高いロールプレイです。</p>
+                    <div class="mt-4 text-xs font-bold text-amber-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">接客業やオフィスでのクレームシナリオが書かれたカード。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>店員（または担当者）と怒っている客の役に分かれます。</li>
+                            <li>店員役は「申し訳ございません」だけでなく、「〜という状況でして」「すぐに〜いたします」と具体的な対応を日本語で示します。</li>
+                            <li>制限時間内に客が納得しなければ失敗です。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">「〜ていただくことは可能でしょうか」などの条件付きの提案や、責任を認めつつも冷静に対処するビジネス特有の言葉遣いに焦点を当てます。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">4</span><h3 class="text-lg font-bold game-title group-hover:text-amber-700 transition-colors">即興スピーチ (TED風)</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 準備なしで話を広げる流暢さ</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">ランダムに表示される画像を見ながら、準備時間ゼロで3分間の専門家風のスピーチを行います。</p>
+                    <div class="mt-4 text-xs font-bold text-amber-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">ランダムで無関係な画像5枚（例：時計、森、パソコン）を映すスクリーン。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>学生が立ち上がり、ホワイトボードにランダムな画像が投影されます。</li>
+                            <li>専門家になりきって、その画像からインスピレーションを得たスピーチを即座に開始します。</li>
+                            <li>45秒ごとに画像が変わります。話し手は、新しい画像を現在話している内容にシームレスに統合させなければなりません。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">話題が突然変わってもパニックにならず、「さて、次にこれを見てください」「これに関連して〜」と繋ぐ会話の瞬発力（流暢さ）を評価します。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">5</span><h3 class="text-lg font-bold game-title group-hover:text-amber-700 transition-colors">尋問と回避</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 誘導尋問をかわす（部分否定）</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">法廷の証人（または言い訳をする人）として、矢継ぎ早の質問を「〜わけではありません」と正確にかわします。</p>
+                    <div class="mt-4 text-xs font-bold text-amber-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">証人のためのアリバイ/背景設定シート。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>「証人」には、1つの致命的な欠陥を含むアリバイが書かれたカードが渡されます。</li>
+                            <li>クラスは検察官として行動し、「〜したんじゃないですか？」と誘導尋問をします。</li>
+                            <li>証人は「わかりません」と言わずに、「行ったわけではありません」「〜というわけではなく…」と部分否定を使って巧みに逃げます。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">「〜わけではない（完全に否定はしないが…）」や「記憶にありませんが…」といった、曖昧さを残す逃げの語彙（回避的語彙）を教えます。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">6</span><h3 class="text-lg font-bold game-title group-hover:text-amber-700 transition-colors">専門家会議（シンクタンク）</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 異なる立場からの意見の統合</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">全く異なる専門分野の専門家たちが、未知のグローバルな危機を解決しようと意見を戦わせます。</p>
+                    <div class="mt-4 text-xs font-bold text-amber-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">様々な職業の役割カード（例：医者、経済学者、環境活動家）。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>不可能なシナリオを提示します：「新しいウイルスが発生したが、特効薬を作ると経済がストップする。」</li>
+                            <li>専門家たちは自分の職業の立場（医者は命、経済学者はお金）から議論します。</li>
+                            <li>最終的に「〜するべきだ」「〜たほうがいい」と妥協点を見つけ、一つの提案書にまとめます。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">一般的な日本語から抜け出し、割り当てられた立場に基づく少し専門的な語彙（利益、リスク、優先順位）を使う訓練になります。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">7</span><h3 class="text-lg font-bold game-title group-hover:text-amber-700 transition-colors">言いにくいことの伝え方</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: クッション言葉を用いた丁寧な議論</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">同僚の体臭問題や、文化的な違いによる誤解など、非常にデリケートな話題を相手を怒らせずに切り出します。</p>
+                    <div class="mt-4 text-xs font-bold text-amber-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">デリケートな状況を詳述したプロンプトカード。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>ペアにデリケートなシナリオが配られます。</li>
+                            <li>彼らは「言いにくいのですが…」「もしかして〜ですか？」などの前置きや、極端な丁寧語を駆使して会話をロールプレイします。</li>
+                            <li>クラスは、使用された言葉の社会的適切さを評価します（直球すぎなかったか、曖昧すぎなかったか）。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">N3レベルの会話は言葉を知っているだけでなく、いつ「言わないか」を知ることも重要です。「〜していただけると助かるのですが」といった婉曲表現の練習になります。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-slate-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">8</span><h3 class="text-lg font-bold game-title group-hover:text-amber-700 transition-colors">架空の商品プレゼン</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 真面目なトーンでの皮肉とユーモア</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">全く役に立たない、またはおかしな商品を、完璧なビジネス用語と説得力で投資家に売り込みます。</p>
+                    <div class="mt-4 text-xs font-bold text-amber-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">ひどい商品のリスト（例：「透明な玄関のドア」「空気を毎月お届けするサブスク」）。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>グループにばかばかしい商品を割り当てます。</li>
+                            <li>彼らはビジネス用語（画期的、効率化、ニーズに応える）を使って、真面目に3分間のプレゼンを準備します。</li>
+                            <li>決して笑ったり、商品が悪いと認めてはいけません。真面目な言葉遣いとおかしな商品のギャップからユーモアが生まれます。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">カタカナ語のビジネス用語（イノベーション、シナジー）や「〜という画期的なシステムです」といったプレゼン特有の言い回しを褒めましょう。</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reading" class="tab-content">
+            <div class="mb-6 border-l-4 border-teal-500 pl-4">
+                <h2 class="text-2xl font-bold text-slate-800">読解ゲーム</h2>
+                <p class="text-slate-500">文章の構成、接続詞、筆者の本当の意図（行間）、そして情報収集のスピードを向上させます。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-teal-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-teal-100 text-teal-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">1</span><h3 class="text-lg font-bold game-title group-hover:text-teal-700 transition-colors">皮肉の解読</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 筆者の本当の意図（反語）を読み取る</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">表面的には褒めているように見えて、実は批判している風刺的な文章を読んで、そのからくりを特定します。</p>
+                    <div class="mt-4 text-xs font-bold text-teal-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">風刺的なブログ記事やコラム（虚構新聞などのようなもの）。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>真面目なトーンで非常にばかばかしい前提を提示しているテキストを提供します。</li>
+                            <li>学生は、著者が「実は本気ではない」と合図している文法的、または語彙的な瞬間（ヒント）を見つけ出します。</li>
+                            <li>そのジョークを「理解」するために必要な日本の文化的背景について議論します。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">読解問題でよくある「筆者が言いたいことは何か」を解く訓練です。大げさな表現（なんと素晴らしいことだろう）などが逆説のヒントになることを教えます。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-teal-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-teal-100 text-teal-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">2</span><h3 class="text-lg font-bold game-title group-hover:text-teal-700 transition-colors">意見の要約</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 対立する意見を一つにまとめる</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">あるテーマに関する5つの異なる意見（賛成・反対）を読み、それらを「〜という意見がある一方で」と1つの段落に要約します。</p>
+                    <div class="mt-4 text-xs font-bold text-teal-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">同じ商品やニュースに対する5つの異なるレビューやコメント。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>5つの短い意見を配ります。学生はそれを斜め読みし、共通点と対立点を見つけます。</li>
+                            <li>全体像を網羅する150文字の段落を一つ書きます。</li>
+                            <li>構成例：「多くの人がAだと主張する一方で、最近はBという意見も増えている。しかし…」</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">情報検索と要約のスキルです。「〜に対して」「〜の一方で」という対比の文法を効果的に使うよう指導します。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-teal-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-teal-100 text-teal-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">3</span><h3 class="text-lg font-bold game-title group-hover:text-teal-700 transition-colors">行間を読む</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 感情を表す言葉を使わずに感情を推測する</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">「悲しい」「嬉しい」という直接的な言葉が一切書かれていない物語を読み、登場人物の感情や関係性を推理します。</p>
+                    <div class="mt-4 text-xs font-bold text-teal-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">情景描写と会話だけで構成された短い小説の一部。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>説明がなく、曖昧な会話や行動だけのテキストを提供します。（例：「彼は時計を見て、ため息をついた」）</li>
+                            <li>学生は心理プロファイラーとして行動します。登場人物は「実際には」何を考えているのでしょうか？</li>
+                            <li>証拠となる具体的な言葉の使い方（例：何度も同じことを聞くなど）をハイライトして、自説を証明します。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">日本の文章（特に小説やエッセイ）では、感情を直接表現するよりも情景で描写することが好まれます。N3の「心情把握」問題の対策になります。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-teal-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-teal-100 text-teal-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">4</span><h3 class="text-lg font-bold game-title group-hover:text-teal-700 transition-colors">文章の再構築（エディターのメス）</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 接続詞と文脈の論理的な繋がりを理解する</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">バラバラに切り刻まれた段落を、接続詞や指示語を頼りに元の論理的な順番に並び替えます。</p>
+                    <div class="mt-4 text-xs font-bold text-teal-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">段落ごとに切り離されたエッセイや説明文。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>テキストを段落ごとに分け、シャッフルして配布します。</li>
+                            <li>学生は「しかし」「例えば」「このように」などの接続詞をヒントに、正しい順番にパズルを組み立てます。</li>
+                            <li>なぜその順番になるのか、語彙の繋がり（前の段落の単語を次の段落で受けているか）を指摘して正当性を証明します。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">これは高いレベルの読解力です。単に文法がわかるだけでなく、段落をまたいでアイデアがどう論理的に進行するかを追跡する能力が必要です。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-teal-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-teal-100 text-teal-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">5</span><h3 class="text-lg font-bold game-title group-hover:text-teal-700 transition-colors">広告のレトリック分析</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 言語による操作（誇大表現）を見抜く</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">キャッチコピーや商品の宣伝文を読み、曖昧な言葉や消費者を操作しようとするレトリックを暴きます。</p>
+                    <div class="mt-4 text-xs font-bold text-teal-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">少し怪しい商品の広告文や、曖昧な政治家のスピーチ。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>テキストを配布します。学生には「批判的な消費者」の視点で読ませます。</li>
+                            <li>「〜という声が多数！」「絶対に〜」といった、意味ありげだが具体的な根拠がない「ごまかしの言葉」を丸で囲みます。</li>
+                            <li>責任を回避する受身の構造（「〜と言われています」）を特定させます。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">「〜らしい」「〜と言われている」という情報源の曖昧さ（客観性の装い）に気づかせます。読解において事実と意見を分ける重要なスキルです。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-teal-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-teal-100 text-teal-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">6</span><h3 class="text-lg font-bold game-title group-hover:text-teal-700 transition-colors">説得の構造分析</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 意見文の構成（序論・本論・結論）の把握</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">よく書かれた意見文を分解し、筆者がどのようにして読者を説得しようとしているか、その骨組みをマッピングします。</p>
+                    <div class="mt-4 text-xs font-bold text-teal-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">新聞の社説や、よく構成された小論文。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>3色の蛍光ペンを使ってテキストを読みます。</li>
+                            <li>「事実・データ」「筆者の個人的な感情」「結論・主張」をそれぞれ違う色でハイライトします。</li>
+                            <li>なぜこの順番で情報が配置されているのか（例：データで納得させた後に感情に訴えかけているなど）を分析します。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">N3の長文読解では「筆者の主張はどれか」がよく問われます。文末の表現（〜べきだ、〜のではないか）から結論を見つけ出す技術を教えましょう。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-teal-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-teal-100 text-teal-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">7</span><h3 class="text-lg font-bold game-title group-hover:text-teal-700 transition-colors">文体模写（パロディ）</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 文体（である調・キャラクターの口調）の再現</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">特定の特徴的な文章（固いニュース、女子高生のブログ、昔話など）を読み、全く別の話題をその文体で書き直します。</p>
+                    <div class="mt-4 text-xs font-bold text-teal-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">特徴的な文体で書かれた短い抜粋（例：硬い論文、アニメのキャラクターのセリフ）。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>抜粋を提供します。学生はその文体の「ルール」を解体します（例：論文＝「である」、感情語がない、漢字が多い）。</li>
+                            <li>「カップラーメンの作り方」など、日常的なテーマを与えます。</li>
+                            <li>指定された文体（例：硬い論文調）で、その日常的なテーマの段落を書きます。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">これは文法と語彙の深い理解を必要とします。「〜てあげる」や「〜かしら」などの終助詞や待遇表現が、いかに文章の雰囲気を決定づけるかを学びます。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-teal-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-teal-100 text-teal-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">8</span><h3 class="text-lg font-bold game-title group-hover:text-teal-700 transition-colors">N3 穴埋め問題の極意</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: コロケーション（自然な単語の組み合わせ）の推測</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">選択肢がない状態で、前後の文脈から「ここには絶対この助詞や単語が入る」という感覚を研ぎ澄まします。</p>
+                    <div class="mt-4 text-xs font-bold text-teal-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">N3レベルの長文の穴埋め問題（選択肢なしのオープンクローズ形式）。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>一部の単語や助詞が抜けているテキストを提供します。選択肢（単語バンク）はありません。</li>
+                            <li>空欄には、特定の決まり文句や助詞が入ります（例：「気が（　　）」→「つく」など）。</li>
+                            <li>学生は個別に作業し、純粋に「何が自然に聞こえるか」という感覚に頼って空欄を埋めます。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">「〜に関心を持った」「〜の影響を受けた」のような、動詞と名詞の決まった組み合わせ（コロケーション）を文脈から予測する力を養います。</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comprehensive" class="tab-content">
+            <div class="mb-6 border-l-4 border-fuchsia-500 pl-4">
+                <h2 class="text-2xl font-bold text-slate-800">総合スキルレビュー</h2>
+                <p class="text-slate-500">読む・書く・聞く・話すを極限まで統合し、試験対策と現実世界でのサバイバル能力を鍛えます。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-fuchsia-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-fuchsia-100 text-fuchsia-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">1</span><h3 class="text-lg font-bold game-title group-hover:text-fuchsia-700 transition-colors">総合クイズ・サバイバル</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 知識の素早い引き出し（瞬発力）</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">漢字の読み、聴解、文法の間違い探しを高速で行う、日本語学習者のためのアルティメット・トリビアです。</p>
+                    <div class="mt-4 text-xs font-bold text-fuchsia-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">音声、画像、テキストのパズルを含む総合的なスライドショー。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>マルチメディアクイズを作成します。</li>
+                            <li>ラウンド1: 3秒の音声クリップを聞き、言った言葉を正確にタイピングする。</li>
+                            <li>ラウンド2: 助詞が1つ間違っているN3の文を読み、ホワイトボードに正しい助詞を書く。</li>
+                            <li>ラウンド3: ランダムに生成されたトピックについて30秒間で早口で意見を言う。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">試験で最も重要なのは「スピード」です。じっくり考えれば解ける問題を、瞬間的に処理する脳の回路を作ります。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-fuchsia-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-fuchsia-100 text-fuchsia-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">2</span><h3 class="text-lg font-bold game-title group-hover:text-fuchsia-700 transition-colors">JLPT N3 模擬試験耐久</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 試験のスタミナとタイムマネジメント</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">実際の日本語能力試験（N3）の最も過酷な読解セクションを、厳格な制限時間内で解き切る訓練です。</p>
+                    <div class="mt-4 text-xs font-bold text-fuchsia-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">本物のJLPT N3過去問の読解部分。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>N3試験の「読解」部分を実施します。</li>
+                            <li>絶対的な沈黙を強制します。実際の試験と全く同じ、あるいは少し短めの制限時間を与えます。</li>
+                            <li>終了後、すぐにペアになり、どの問題に時間をかけすぎたか、どこで諦めて次に進むべきだったかを自己分析させます。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">言語能力と同じくらい「心理的耐久力」をテストします。わからない単語に執着するのではなく、推測して先に進む勇気を教えましょう。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-fuchsia-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-fuchsia-100 text-fuchsia-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">3</span><h3 class="text-lg font-bold game-title group-hover:text-fuchsia-700 transition-colors">ルールブック作成（禁止と義務）</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 義務・禁止表現を用いた公式な文章の作成</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">シェアハウスや会社の厳しい規則を、「〜こと」「〜てはいけない」「〜なければならない」を使って作成します。</p>
+                    <div class="mt-4 text-xs font-bold text-fuchsia-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">問題が多いシェアハウスの設定シナリオ。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>トラブルについての話し合いの後、ルールを起草するために集まります。</li>
+                            <li>公式な書き言葉を使わなければなりません：「ゴミは指定の日に出す**こと**」「夜10時以降は騒がない**ように**」。</li>
+                            <li>他のグループがそのルールを読み、ルールの「抜け穴」や曖昧な表現を探して突っ込みます。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">案内板や説明書でよく見る「〜こと」という命令・指示の表現はN3の頻出文法です。正確な表現力を養います。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-fuchsia-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-fuchsia-100 text-fuchsia-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">4</span><h3 class="text-lg font-bold game-title group-hover:text-fuchsia-700 transition-colors">フェイクニュース作成と論破</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: もっともらしい情報を作成し、批判的に読む</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">グループで巧妙な嘘のニュース記事をデザインし、他のグループと交換して矛盾を指摘（論破）し合います。</p>
+                    <div class="mt-4 text-xs font-bold text-fuchsia-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">記事を執筆するための紙やパソコン。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>もっともらしいフェイクニュースをでっち上げます（例：「毎朝チョコを食べると日本語が上達する」）。</li>
+                            <li>専門家の引用（〜教授によると…）や、もっともらしい言葉を使って本物のように書きます。</li>
+                            <li>記事を交換し、反対グループは「このデータはおかしい」「論理が飛躍している」と一つ一つ論破するレポートを書きます。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">メディアリテラシーの究極のテストです。情報を鵜呑みにせず、「〜らしいが、本当だろうか」と疑って読む力をつけます。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-fuchsia-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-fuchsia-100 text-fuchsia-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">5</span><h3 class="text-lg font-bold game-title group-hover:text-fuchsia-700 transition-colors">未解決事件の推理（時系列）</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 曖昧なデータから時系列を合成する</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">目撃者の矛盾する証言や手紙を読み比べ、誰がいつ何をしたのか（〜前に、〜たあとで、〜ている間に）を整理します。</p>
+                    <div class="mt-4 text-xs font-bold text-fuchsia-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">証拠、手紙、警察の報告書など、矛盾する情報が書かれたファイルのセット。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>未解決ミステリーに関する様々なテキスト（日記、レシート、証言）を提供します。</li>
+                            <li>答えは直接書かれていません。手がかりは「私が着いたとき、彼はすでに帰っていた」などの文法的な時制の中に隠されています。</li>
+                            <li>グループは情報をまとめ、誰が犯人か、タイムラインを添えて最終的な告発状を書きます。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">「〜ている間に（同時進行）」「〜た直後に」など、複数の文書にまたがる高度な時間表現の追跡能力を要求します。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-fuchsia-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-fuchsia-100 text-fuchsia-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">6</span><h3 class="text-lg font-bold game-title group-hover:text-fuchsia-700 transition-colors">緊迫の企画会議</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 丁寧な提案と反対意見の提示</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">各参加者が隠された目的（裏のミッション）を持っている企画会議で、主導権を握るための交渉を行います。</p>
+                    <div class="mt-4 text-xs font-bold text-fuchsia-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">隠された動機と条件が書かれたキャラクター設定用紙。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>役割を割り当てます：社長、経理、新入社員など。</li>
+                            <li>それぞれに秘密の目的を与えます（例：経理は予算をゼロにしたいが、正面からは反対できない）。</li>
+                            <li>N3レベルのビジネス日本語を使用して会議を進行します。</li>
+                            <li>「おっしゃることはわかりますが…」とクッション言葉を使いながら、自分の目的へと誘導します。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">「手を挙げて発言する」のではなく、「ちょっとよろしいでしょうか」と言葉を使ってシームレスに発言権を奪う（ターンテーキング）練習を評価します。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-fuchsia-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-fuchsia-100 text-fuchsia-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">7</span><h3 class="text-lg font-bold game-title group-hover:text-fuchsia-700 transition-colors">レポート執筆（客観的な記述）</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 「である」調でのフォーマルな記述</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">アンケート結果やグラフのデータを元に、「〜という傾向が見られる」といった客観的な分析レポートを書きます。</p>
+                    <div class="mt-4 text-xs font-bold text-fuchsia-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">架空のアンケート調査結果（グラフや表）。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>グラフを見て、その社会問題に関する短いレポートの「序論」と「分析結果」を書きます。</li>
+                            <li>「私は〜と思う」という主観を排除し、「〜ということがわかる」「グラフは〜を示している」という名詞化・客観表現に強く依存させます。</li>
+                            <li>「編集委員会（教師）」に提出し、厳しくレビューされます。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">JLPTには直接のライティング試験はありませんが、この形式の文章を読む問題（情報検索・グラフ読み取り）は必ず出題されます。書くことで読むスピードが上がります。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-fuchsia-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-fuchsia-100 text-fuchsia-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">8</span><h3 class="text-lg font-bold game-title group-hover:text-fuchsia-700 transition-colors">ピア・エディティング（添削デスク）</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: より自然な表現へのブラッシュアップ</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">クラスメイトの作文を交換し、単なる文法ミスだけでなく、より自然で洗練された語彙（N3レベル）に書き換えます。</p>
+                    <div class="mt-4 text-xs font-bold text-fuchsia-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">学生が書いた作文の下書き。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>作文を交換し、彼らは出版社の「シニアエディター」として行動します。</li>
+                            <li>基本的な文法だけでなく、「とても」を「非常に」に変えるなど、スタイルの弱点（子供っぽい表現や反復）を探します。</li>
+                            <li>クラスメイトの段落を1つ完全に書き直し、より「プロフェッショナル」な基準に引き上げます。</li>
+                            <li>なぜそのように修正したのかを元の著者に説明します。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">「通じる」日本語から「自然で美しい」日本語へのステップアップです。他人の文章の不自然さに気づくことで、自己修正能力が高まります。</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="listening" class="tab-content">
+            <div class="mb-6 border-l-4 border-sky-500 pl-4">
+                <h2 class="text-2xl font-bold text-slate-800">聴解ゲーム</h2>
+                <p class="text-slate-500">カジュアルな会話、雑音の中のアナウンス、早口の情報処理など、実際の日本の環境に適応します。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-sky-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">1</span><h3 class="text-lg font-bold game-title group-hover:text-sky-700 transition-colors">専門家の解説聞き取り</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 長い説明の要点をメモする</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">ニュース解説や少し専門的なトピックについて話すネイティブの音声を聞き、重要なポイントだけを抽出します。</p>
+                    <div class="mt-4 text-xs font-bold text-sky-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">ポッドキャストやニュースの解説コーナーの音声クリップ（例：環境問題、経済）。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>3分間の少し硬いトーンの解説音声を流します。</li>
+                            <li>学生は知らない単語にパニックにならず、文脈から推測しながら要点だけをメモします。</li>
+                            <li>「何が問題で、どう解決すべきと言っているか」を1文で要約します。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">N3の「概要理解」問題の対策です。全部を完璧に聞き取る必要はなく、「つまり」「要するに」というキーワードの後の言葉に集中させます。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-sky-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">2</span><h3 class="text-lg font-bold game-title group-hover:text-sky-700 transition-colors">声のトーン分析</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 言葉の裏にある感情を読み取る</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">「いいよ」や「大丈夫」といった同じ単語でも、声の高さやため息から、不満・ためらい・喜びを聞き分けます。</p>
+                    <div class="mt-4 text-xs font-bold text-sky-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">ドラマやアニメの短い感情的な会話クリップ。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>同じ「わかりました」というセリフが使われる、3つの異なる状況の音声を流します。</li>
+                            <li>音声を止め、「この人は本当にわかって納得しているか、それとも怒っているか？」と尋ねます。</li>
+                            <li>声のピッチ、間の取り方（沈黙）、息の吐き方から、キャラクターの本当の感情を分析します。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">日本語は「何を言ったか」よりも「どう言ったか」が重要な言語です。文字情報だけに頼らないパラランゲージ（周辺言語）の理解を深めます。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-sky-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">3</span><h3 class="text-lg font-bold game-title group-hover:text-sky-700 transition-colors">雑音の中のアナウンス</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: ノイズから必要な事実を抽出する</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">駅のホームの騒音や、周りの人が話している状況で流れるアナウンスから、自分の乗る電車の時間などを正確に聞き取ります。</p>
+                    <div class="mt-4 text-xs font-bold text-sky-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">駅や空港、デパートなどの実際の環境音が混ざったアナウンス音声。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>「あなたは〇〇行きの電車に乗りたいです」というタスクを書いたワークシートを配ります。</li>
+                            <li>環境音が大きく、少し聞き取りにくいアナウンス音声を流します。</li>
+                            <li>学生はノイズを無視して、発車時刻やホームの番号などの具体的なデータのみを孤立させて聞き取ります。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">これは現実世界の認知負荷を再現しています。スポークスパーソンの「アンカー」となる言葉（「お知らせいたします」「〜番線」）に耳を傾け、情報を探すよう教えます。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-sky-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">4</span><h3 class="text-lg font-bold game-title group-hover:text-sky-700 transition-colors">即時要約（シャドーイング）</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: リアルタイムでのアイデアの変換と要約</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">話の長い人の愚痴やスピーチを2分間聞き、直後に「つまり〜ということです」と30秒で客観的にまとめます。</p>
+                    <div class="mt-4 text-xs font-bold text-sky-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">感情的で、まとまりのない話し方をするインタビューや会話の音声。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>熱く、しかし繰り返しが多い音声（例：「最近の若者のマナーについて」）を2分間流します。</li>
+                            <li>音声が止まったらすぐに学生を指名します。彼らは正確に30秒で、感情を削ぎ落とし、フォーマルな日本語で中心となる主張を伝えます。</li>
+                            <li>例：長い愚痴が「話し手は、公共の場でのスマートフォンの使用マナーが悪いと主張しています」に変わります。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">通訳の基礎トレーニングに似ています。雑談や感情的な「ノイズ」をフィルターにかけ、純粋な意味（セマンティックな意図）だけを抽出させます。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-sky-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">5</span><h3 class="text-lg font-bold game-title group-hover:text-sky-700 transition-colors">方言とカジュアル表現</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 極端な音声変化（縮約形）の解読</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">「〜といて（〜ておいて）」「〜じゃん」「〜やねん」など、教科書にはない話し言葉の縮約形や軽い方言を聞き取ります。</p>
+                    <div class="mt-4 text-xs font-bold text-sky-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">関西弁や若者言葉を使った短いビデオ/音声クリップ。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>「これ、置いといて」のような、ネイティブがよく使うカジュアルな縮約形の10秒クリップを流します。</li>
+                            <li>3回再生します。学生は聞いた音を、標準的な教科書の日本語（「これを置いておいてください」）に書き直します。</li>
+                            <li>会話の中で母音がどう省略されたり変化したりするかを解説します。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">N3の聴解では、「〜とく（〜ておく）」「〜なきゃ（〜なければならない）」などのカジュアルな音の変化が頻出します。音と文法のリンクを強化しましょう。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-sky-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">6</span><h3 class="text-lg font-bold game-title group-hover:text-sky-700 transition-colors">長文の迷宮（脱線トーク）</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 逸脱する話から本筋を追跡する</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">話が色々な方向に脱線したり、「あ、やっぱり」と訂正が何度も入ったりする複雑な会話から、最終的な結論を見つけます。</p>
+                    <div class="mt-4 text-xs font-bold text-sky-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">予定の変更や言い間違いが多い会話の音声（例：友達との待ち合わせ場所を決める会話）。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>「えっと、3時に駅前って言ったけど、やっぱり4時にカフェにして、あ、でもそれだと遅いから…」というような音声を流します。</li>
+                            <li>学生は途中の「フィラー（えっと、あの）」や脱線の情報を無視して、最終的な「主語」と「動詞（結論）」を特定します。</li>
+                            <li>最終的に決まった待ち合わせ時間と場所だけをメモします。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">ワーキングメモリ（作業記憶）を鍛えます。最終的に話者が動詞（結論）にたどり着くまで、途中の情報を頭に保持しつつ、古い情報を捨てる訓練です。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-sky-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">7</span><h3 class="text-lg font-bold game-title group-hover:text-sky-700 transition-colors">文脈依存のジョーク</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 暗黙の文化的背景を理解する</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">漫才やバラエティ番組のクリップを見て、日本特有の「ツッコミ」や「ボケ」の背景にある文化的な前提を説明します。</p>
+                    <div class="mt-4 text-xs font-bold text-sky-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">わかりやすい日本のコメディ番組や、日常のユーモアを含む会話クリップ。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>話者が日本の日常的な習慣（例：満員電車、お辞儀の連続）について冗談を言うクリップを再生します。</li>
+                            <li>音声を一時停止し、「なぜ今、観客は笑ったのですか？」と尋ねます。</li>
+                            <li>学生はそのユーモアの前提となっている日本の習慣や暗黙のルールを説明し、会話の意味を解読します。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">言語は文化から切り離せません。言葉そのものの意味がわかっても、文化的コンテキスト（文脈）を知らなければコミュニケーションは成立しないことを学びます。</div>
+                </div>
+
+                <div class="group bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg hover:border-sky-400 hover:-translate-y-1 transition-all cursor-pointer relative" onclick="openModal(this)">
+                    <div class="flex items-center gap-3 mb-3"><span class="bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center font-bold">8</span><h3 class="text-lg font-bold game-title group-hover:text-sky-700 transition-colors">情報の高速処理（ナビゲーター）</h3></div>
+                    <p class="text-sm font-semibold text-emerald-600 mb-2">目標: 連続する数字や方向を瞬時に処理する</p>
+                    <p class="text-sm text-slate-500 line-clamp-2">電話番号、暗証番号、道案内の右・左などの連続する情報を、ネイティブの速いスピードで正確に書き留めるシミュレーションです。</p>
+                    <div class="mt-4 text-xs font-bold text-sky-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">詳細を読む <i class="ph-bold ph-arrow-right"></i></div>
+                    <div class="hidden game-materials">道案内の音声（右に曲がる、3つ目の信号など）や、電話番号を読み上げる音声、空白の地図。</div>
+                    <div class="hidden game-steps">
+                        <ol class="list-decimal list-outside ml-4 space-y-2">
+                            <li>学生に空白の地図またはメモ用紙を渡します。</li>
+                            <li>早口で情報が連続する音声クリップを再生します（例：「駅を出て2つ目の信号を右に曲がり、100メートル進んで左側のビルです」）。</li>
+                            <li>パニックにならずに、マップ上に正確なルートを素早く書き込むか、メモを取ります。</li>
+                        </ol>
+                    </div>
+                    <div class="hidden game-tips">プレッシャーの下での数字と空間的言語の究極のテストです。母国語と同じ速度で、日本語の数字や方向感覚を脳内で処理できるかを試します。</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="gameModal" class="fixed inset-0 bg-slate-900/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm hidden" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col transform transition-transform duration-300 scale-95 opacity-0 border border-slate-200">
+            
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center sticky top-0 z-10">
+                <h2 id="modalTitle" class="text-2xl font-bold text-slate-900 tracking-tight">ゲームタイトル</h2>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-rose-600 hover:bg-rose-50 p-2 rounded-full transition-colors outline-none focus:ring-2 focus:ring-rose-200">
+                    <i class="ph ph-x text-2xl"></i>
+                </button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto space-y-6">
+                <div>
+                    <h4 class="text-lg font-bold flex items-center gap-2 text-indigo-700 mb-2 border-b border-indigo-100 pb-1">
+                        <i class="ph-fill ph-toolbox text-xl"></i> 必要なもの
+                    </h4>
+                    <p id="modalMaterials" class="text-slate-700 leading-relaxed pl-1"></p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold flex items-center gap-2 text-emerald-700 mb-2 border-b border-emerald-100 pb-1">
+                        <i class="ph-fill ph-list-numbers text-xl"></i> やり方（ステップ）
+                    </h4>
+                    <div id="modalSteps" class="text-slate-700 leading-relaxed pl-1"></div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold flex items-center gap-2 text-amber-600 mb-2 border-b border-amber-100 pb-1">
+                        <i class="ph-fill ph-lightbulb text-xl"></i> N3 マスターのためのヒント
+                    </h4>
+                    <div class="bg-amber-50 rounded-xl p-4 border border-amber-200 shadow-inner">
+                        <p id="modalTips" class="text-amber-900 leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-100 px-6 py-4 border-t border-slate-200 flex justify-end">
+                <button onclick="closeModal()" class="px-6 py-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-lg shadow-sm transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 outline-none">
+                    閉じる
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // 分頁切換邏輯 (Tab switching logic)
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'text-slate-900', 'active-tab');
+                btn.classList.add('text-slate-300', 'hover:bg-slate-700', 'hover:text-white');
+            });
+            document.getElementById(tabId).classList.add('active');
+            const activeBtn = document.querySelector(`.tab-btn[data-target="${tabId}"]`);
+            activeBtn.classList.remove('text-slate-300', 'hover:bg-slate-700', 'hover:text-white');
+            activeBtn.classList.add('bg-white', 'text-slate-900', 'active-tab');
+            activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+
+        // 彈出視窗邏輯 (Modal logic)
+        const modal = document.getElementById('gameModal');
+        const modalContent = document.getElementById('modalContent');
+
+        function openModal(cardElement) {
+            // 從卡片中取得隱藏資料 (Get hidden data from the card)
+            const title = cardElement.querySelector('.game-title').innerText;
+            const materials = cardElement.querySelector('.game-materials').innerHTML;
+            const steps = cardElement.querySelector('.game-steps').innerHTML;
+            const tips = cardElement.querySelector('.game-tips').innerHTML;
+
+            // 填入視窗內容 (Populate Modal)
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMaterials').innerHTML = materials;
+            document.getElementById('modalSteps').innerHTML = steps;
+            document.getElementById('modalTips').innerHTML = tips;
+
+            // 顯示視窗並加入動畫 (Show Modal with animation)
+            modal.classList.remove('hidden');
+            // 防止背景滑動 (Prevent background scrolling)
+            document.body.style.overflow = 'hidden'; 
+            
+            // 觸發動畫 (Trigger animation)
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            // 隱藏動畫 (Hide animation)
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            
+            // 動畫結束後隱藏 DOM (Hide DOM after animation)
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto'; // 恢復背景滑動 (Restore background scrolling)
+            }, 300);
+        }
+
+        // 點擊背景關閉視窗 (Close modal on outside click)
+        function closeModalOnOutsideClick(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
